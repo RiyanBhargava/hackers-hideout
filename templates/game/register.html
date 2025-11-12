@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Chrono Nexus Protocol{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>🚀 Agent Registration</h2>
+        <p class="auth-subtitle">Join the mission to save the timeline</p>
+        
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="team_name">Team Name</label>
+                <input type="text" id="team_name" name="team_name" required class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required class="form-input">
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-full">Register</button>
+        </form>
+        
+        <p class="auth-footer">
+            Already registered? <a href="{% url 'login' %}">Login here</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

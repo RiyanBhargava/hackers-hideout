@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Part {{ challenge.part_number }}: {{ challenge.title }}{% endblock %}
+
+{% block content %}
+<div class="challenge-container">
+    <div class="challenge-breadcrumb">
+        <a href="{% url 'game_dashboard' %}">← Back to Dashboard</a>
+    </div>
+
+    <div class="challenge-main">
+        <div class="challenge-title-section">
+            <h2>Part {{ challenge.part_number }}: {{ challenge.title }}</h2>
+            <div class="challenge-meta">
+                <span class="challenge-difficulty difficulty-{{ challenge.difficulty|lower }}">{{ challenge.difficulty }}</span>
+                <span class="challenge-points">💎 {{ challenge.points }} points</span>
+            </div>
+        </div>
+
+        <div class="story-section">
+            <h3>📖 Story</h3>
+            <div class="story-text">
+                {{ challenge.story_text|linebreaks }}
+            </div>
+        </div>
+
+        <div class="challenge-section">
+            <h3>🧩 Challenge</h3>
+            <div class="challenge-text">
+                {{ challenge.challenge_text|linebreaks }}
+            </div>
+        </div>
+
+        {% if not is_completed %}
+        <div class="hint-section">
+            {% if hint_used %}
+            <div class="hint-content">
+                <h3>💡 Hint</h3>
+                <p>{{ challenge.hint }}</p>
+            </div>
+            {% else %}
+            <form method="POST" action="{% url 'use_hint' challenge.part_number %}" class="hint-form">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">
+                    💡 Buy Hint (Cost: {{ challenge.hint_penalty }} points)
+                </button>
+                <p style="color: var(--text-secondary); margin-top: 0.5rem; font-size: 0.9rem;">
+                    Your current score: {{ player.total_score }} points
+                </p>
+            </form>
+            {% endif %}
+        </div>
+
+        <div class="submission-section">
+            <h3>Submit Your Answer</h3>
+            <form method="POST" action="{% url 'submit_answer' challenge.part_number %}" class="submission-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="answer" placeholder="flag{your_answer_here}" required class="form-input answer-input">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Answer</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="completion-message">
+            <h3>✅ Challenge Completed!</h3>
+            <p>You've successfully decoded this station. Continue to the next one!</p>
+            <a href="{% url 'game_dashboard' %}" class="btn btn-primary">Return to Dashboard</a>
+        </div>
+        {% endif %}
+
+        {% if submissions %}
+        <div class="submission-history">
+            <h3>Recent Attempts</h3>
+            <div class="submissions-list">
+                {% for submission in submissions %}
+                <div class="submission-item {% if submission.is_correct %}correct{% else %}incorrect{% endif %}">
+                    <span class="submission-answer">{{ submission.submitted_answer }}</span>
+                    <span class="submission-result">
+                        {% if submission.is_correct %}
+                            ✓ Correct (+{{ submission.points_earned }} pts)
+                        {% else %}
+                            ✗ Incorrect
+                        {% endif %}
+                    </span>
+                    <span class="submission-time">{{ submission.submitted_at|date:"M d, H:i" }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

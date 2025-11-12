@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile - {{ player.team_name }}{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <h2>Agent Profile: {{ player.team_name }}</h2>
+        <div class="profile-score">
+            <span class="score-label">Total Score:</span>
+            <span class="score-value">{{ player.total_score }}</span>
+        </div>
+    </div>
+
+    <div class="profile-stats">
+        <div class="stat-card">
+            <h3>{{ correct_attempts }}</h3>
+            <p>Challenges Solved</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ total_attempts }}</h3>
+            <p>Total Attempts</p>
+        </div>
+        <div class="stat-card">
+            <h3>{{ hints_used }}</h3>
+            <p>Hints Used</p>
+        </div>
+        <div class="stat-card">
+            <h3>{% if total_attempts > 0 %}{{ correct_attempts|floatformat:0 }}%{% else %}0%{% endif %}</h3>
+            <p>Success Rate</p>
+        </div>
+    </div>
+
+    <div class="profile-info">
+        <div class="info-section">
+            <h3>Account Details</h3>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Joined:</strong> {{ player.created_at|date:"F d, Y" }}</p>
+        </div>
+
+        {% if player.current_challenge %}
+        <div class="info-section">
+            <h3>Current Mission</h3>
+            <p><strong>Part {{ player.current_challenge.part_number }}:</strong> {{ player.current_challenge.title }}</p>
+            <a href="{% url 'challenge_detail' player.current_challenge.part_number %}" class="btn btn-primary">Continue Mission</a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if submissions %}
+    <div class="recent-submissions">
+        <h3>Recent Submissions</h3>
+        <div class="submissions-list">
+            {% for submission in submissions %}
+            <div class="submission-item {% if submission.is_correct %}correct{% else %}incorrect{% endif %}">
+                <div class="submission-challenge">Part {{ submission.challenge.part_number }}: {{ submission.challenge.title }}</div>
+                <div class="submission-answer">{{ submission.submitted_answer }}</div>
+                <div class="submission-result">
+                    {% if submission.is_correct %}
+                        ✓ Correct (+{{ submission.points_earned }} pts)
+                    {% else %}
+                        ✗ Incorrect
+                    {% endif %}
+                </div>
+                <div class="submission-time">{{ submission.submitted_at|date:"M d, Y H:i" }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="profile-footer">
+        <a href="{% url 'game_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Leaderboard - Chrono Nexus Protocol{% endblock %}
+
+{% block content %}
+<div class="leaderboard-container">
+    <div class="leaderboard-header">
+        <h2>🏆 Global Leaderboard</h2>
+        <p>Top agents across the solar system</p>
+    </div>
+
+    <div class="leaderboard-table-container">
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Team Name</th>
+                    <th>Score</th>
+                    <th>Progress</th>
+                    <th>Joined</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                <tr {% if player.user == user %}class="current-player"{% endif %}>
+                    <td class="rank">
+                        {% if forloop.counter == 1 %}
+                            🥇
+                        {% elif forloop.counter == 2 %}
+                            🥈
+                        {% elif forloop.counter == 3 %}
+                            🥉
+                        {% else %}
+                            {{ forloop.counter }}
+                        {% endif %}
+                    </td>
+                    <td class="team-name">
+                        {{ player.team_name }}
+                        {% if player.user == user %}<span class="you-badge">(You)</span>{% endif %}
+                    </td>
+                    <td class="score">{{ player.total_score }}</td>
+                    <td class="progress">
+                        {% with completed=player.completed_by.count %}
+                        {{ completed }}/7 challenges
+                        {% endwith %}
+                    </td>
+                    <td class="joined">{{ player.created_at|date:"M d, Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="leaderboard-footer">
+        <a href="{% url 'game_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Chrono Nexus Protocol{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">🌌 THE CHRONO NEXUS PROTOCOL</h1>
+        <p class="hero-subtitle">Year 2149 — A rogue AI threatens the timeline</p>
+        <div class="hero-description">
+            <p>NEXUS-9 has infiltrated the orbital archives and is rewriting history itself.</p>
+            <p>Your cyber-expedition team must decode seven encrypted stations across the solar system.</p>
+            <p>The fate of the timeline rests in your hands, Agent.</p>
+        </div>
+        <div class="hero-actions">
+            <a href="{% url 'register' %}" class="btn btn-primary">Begin Mission</a>
+            <a href="{% url 'login' %}" class="btn btn-secondary">Resume Mission</a>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="feature-card">
+        <h3>🧩 Seven Challenges</h3>
+        <p>Navigate through increasingly difficult cryptographic puzzles</p>
+    </div>
+    <div class="feature-card">
+        <h3>⚡ Earn Points</h3>
+        <p>Solve challenges to accumulate points based on difficulty</p>
+    </div>
+    <div class="feature-card">
+        <h3>💡 Strategic Hints</h3>
+        <p>Use hints wisely — they cost points but might save the mission</p>
+    </div>
+    <div class="feature-card">
+        <h3>🏆 Global Leaderboard</h3>
+        <p>Compete with other agents across the galaxy</p>
+    </div>
+</div>
+{% endblock %}
