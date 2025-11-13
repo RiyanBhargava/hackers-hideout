@@ -13,9 +13,7 @@ class Challenge(models.Model):
     
     part_number = models.IntegerField(unique=True)
     title = models.CharField(max_length=200)
-    description = models.TextField()
-    story_text = models.TextField()
-    challenge_text = models.TextField()
+    question = models.TextField()
     answer = models.CharField(max_length=200)
     points = models.IntegerField()
     difficulty = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default='MEDIUM')

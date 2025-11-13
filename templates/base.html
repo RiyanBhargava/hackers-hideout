@@ -1,16 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Chrono Nexus Protocol{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <title>{% block title %}Hacker's Hideout{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <h1>🌌 CHRONO NEXUS</h1>
+                <h1>🔐 HACKER'S HIDEOUT</h1>
             </div>
             <div class="nav-links">
                 {% if user.is_authenticated %}
@@ -42,7 +43,7 @@
     </main>
 
     <footer class="footer">
-        <p>Year 2149 — ACM Chrono Nexus Protocol © All Rights Reserved</p>
+        <p>Hacker's Hideout © 2025 - All Rights Reserved</p>
     </footer>
 </body>
 </html>

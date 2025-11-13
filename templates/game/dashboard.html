@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard - Chrono Nexus Protocol{% endblock %}
+{% block title %}Dashboard - Hacker's Hideout{% endblock %}
 
 {% block content %}
 <div class="dashboard-container">
     <div class="dashboard-header">
-        <h2>Mission Control - Agent {{ player.team_name }}</h2>
+        <h2>Control Panel - {{ player.team_name }}</h2>
         <div class="score-display">
             <span class="score-label">Total Score:</span>
             <span class="score-value">{{ player.total_score }}</span>
@@ -13,8 +13,8 @@
     </div>
 
     <div class="mission-briefing">
-        <h3>📡 Mission Status</h3>
-        <p>NEXUS-9 is rewriting time data across seven orbital stations. Decode each station to prevent the collapse of the historical timeline.</p>
+        <h3>📡 Challenge Status</h3>
+        <p>Test your skills across seven increasingly difficult cybersecurity challenges. Can you hack them all?</p>
     </div>
 
     <div class="challenges-grid">
@@ -36,15 +36,15 @@
                 {% if challenge.id in completed_ids %}
                     <span class="status-badge status-completed">✓ Completed</span>
                 {% elif challenge == player.current_challenge %}
-                    <a href="{% url 'challenge_detail' challenge.part_number %}" class="btn btn-primary btn-small">Enter Station</a>
+                    <a href="{% url 'challenge_detail' challenge.part_number %}" class="btn btn-primary btn-small">Start Challenge</a>
                 {% elif challenge.part_number == 7 %}
                     {% if completed_ids|length == 6 %}
                         <a href="{% url 'challenge_detail' challenge.part_number %}" class="btn btn-warning btn-small">Final Challenge</a>
                     {% else %}
-                        <span class="status-badge status-locked">🔒 Complete all stations first</span>
+                        <span class="status-badge status-locked">🔒 Complete all challenges first</span>
                     {% endif %}
                 {% else %}
-                    <span class="status-badge status-locked">🔒 Complete previous station</span>
+                    <span class="status-badge status-locked">🔒 Complete previous challenge</span>
                 {% endif %}
             </div>
         </div>

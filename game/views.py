@@ -49,7 +49,7 @@ def register(request):
         )
         
         login(request, user)
-        messages.success(request, f'Welcome to the Chrono Nexus Protocol, {team_name}!')
+        messages.success(request, f'Welcome to Hacker\'s Hideout, {team_name}!')
         return redirect('game_dashboard')
     
     return render(request, 'game/register.html')
@@ -64,7 +64,7 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, 'Welcome back, Agent!')
+            messages.success(request, 'Welcome back, Hacker!')
             return redirect('game_dashboard')
         else:
             messages.error(request, 'Invalid credentials!')
@@ -75,7 +75,7 @@ def user_login(request):
 def user_logout(request):
     """Player logout"""
     logout(request)
-    messages.success(request, 'You have been logged out. Stay vigilant, Agent.')
+    messages.success(request, 'You have been logged out. Stay vigilant, Hacker.')
     return redirect('home')
 
 

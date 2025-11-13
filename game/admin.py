@@ -6,8 +6,9 @@ from .models import Challenge, Player, Submission, HintUsage
 class ChallengeAdmin(admin.ModelAdmin):
     list_display = ['part_number', 'title', 'difficulty', 'points', 'hint_penalty', 'is_final']
     list_filter = ['difficulty', 'is_final']
-    search_fields = ['title', 'description']
+    search_fields = ['title', 'question']
     ordering = ['part_number']
+    fields = ['part_number', 'title', 'question', 'answer', 'hint', 'points', 'difficulty', 'hint_penalty', 'is_final']
 
 
 @admin.register(Player)

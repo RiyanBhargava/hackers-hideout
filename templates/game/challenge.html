@@ -17,17 +17,10 @@
             </div>
         </div>
 
-        <div class="story-section">
-            <h3>📖 Story</h3>
-            <div class="story-text">
-                {{ challenge.story_text|linebreaks }}
-            </div>
-        </div>
-
         <div class="challenge-section">
             <h3>🧩 Challenge</h3>
             <div class="challenge-text">
-                {{ challenge.challenge_text|linebreaks }}
+                {{ challenge.question|linebreaks }}
             </div>
         </div>
 
@@ -64,7 +57,7 @@
         {% else %}
         <div class="completion-message">
             <h3>✅ Challenge Completed!</h3>
-            <p>You've successfully decoded this station. Continue to the next one!</p>
+            <p>You've successfully solved this challenge. Continue to the next one!</p>
             <a href="{% url 'game_dashboard' %}" class="btn btn-primary">Return to Dashboard</a>
         </div>
         {% endif %}
