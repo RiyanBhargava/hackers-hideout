@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home - Hacker's Hideout{% endblock %}
 
 {% block content %}
 <div class="hero-section">
     <div class="hero-content">
+        <img src="{% static 'images/acm.png' %}" alt="ACM Logo" class="acm-logo-hero">
         <h1 class="hero-title">🔐 HACKER'S HIDEOUT</h1>
         <p class="hero-subtitle">Test Your Hacking Skills</p>
         <div class="hero-description">

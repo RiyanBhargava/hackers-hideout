@@ -51,6 +51,13 @@ body {
     text-shadow: 0 0 10px var(--accent-primary);
 }
 
+.acm-logo {
+    height: 50px;
+    width: auto;
+    margin-right: 1rem;
+    vertical-align: middle;
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
@@ -135,6 +142,13 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     margin-bottom: 3rem;
     border: 1px solid var(--border-color);
+}
+
+.acm-logo-hero {
+    height: 80px;
+    width: auto;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.3));
 }
 
 .hero-title {
@@ -590,6 +604,13 @@ body {
     padding: 2rem;
     margin-top: 4rem;
     color: var(--text-secondary);
+}
+
+.acm-logo-footer {
+    height: 40px;
+    width: auto;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
 }
 
 /* Responsive Design */
